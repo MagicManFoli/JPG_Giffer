@@ -1,10 +1,11 @@
 #!python3
 
 from pathlib import Path
-from os.path import join
 
 file_extensions = ('*.jpg', '*.jpeg')   # case insensitive
 
+
+# TODO: Check file header if file is actually a gif
 
 def input_path():
     """encapsulates folder selection"""
@@ -19,12 +20,12 @@ def input_path():
 
 def change_extension(file):
     p = Path(file)
-    file_name = p.stem
-    base_path = p.parent
+    file_name = p.stem  # file without extension
+    base_path = p.parent  # path without file
 
     print("Current: {} in {}".format(file_name, base_path))
-
-
+    p.rename(Path(base_path, file_name + "_R.gif"))
+    # print("Now called {}".format(p))  # TODO: Why is this showing the old name? Racing with file operation?
 
 
 def main():
@@ -37,7 +38,7 @@ def main():
 
     for ext in file_extensions:
         mask = "**/" + ext
-        new_files = list(folder_path.glob(mask))
+        new_files = list(folder_path.glob(mask))  # generator to list, easier but less efficient
         print("{} files with {} found".format(len(new_files), ext))
         files.extend(new_files)
 
