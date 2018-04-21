@@ -31,8 +31,7 @@ def change_extension(file):
 def main():
     print("Collecting files")
 
-    # folder_path = input_path()
-    folder_path = Path("E:\Test")
+    folder_path = input_path()
 
     files = []
 
